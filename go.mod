@@ -23,6 +23,7 @@ require (
 )
 
 require (
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/golang-migrate/migrate/v4 v4.15.2 // indirect
 	github.com/google/go-github/v39 v39.2.0 // indirect
