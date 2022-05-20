@@ -44,10 +44,10 @@ func (r *TodoListPostgress) Create(userId int,list todo.TodoList)(int ,error){
 func(r *TodoListPostgress) GetAll(userId int)([]todo.TodoList, error){
 	var lists []todo.TodoList
 
-	query := fmt.Sprintf("SELECT tl.id, tl.title, tl.description FROM %s tl INNER JOIN %s ul on tl.id = ul.list_id WHERE ul.user_id = $1",
+	query := fmt.Sprintf("SELECT tl.id, tl.title, tl.description FROM %s tl INNER JOIN %s ul on tl.id = ul.list_id ",
 		todoListTable, userListTable)
 
-	err := r.db.Select(&lists, query, userId)
+	err := r.db.Select(&lists, query)
 	
 	return lists, err
 }
@@ -55,10 +55,10 @@ func(r *TodoListPostgress) GetAll(userId int)([]todo.TodoList, error){
 func (r *TodoListPostgress)GetById(userId,listId int)(todo.TodoList, error){
 	var list todo.TodoList
 
-	query := fmt.Sprintf("SELECT tl.id, tl.title, tl.description FROM %s tl INNER JOIN %s ul on tl.id = ul.list_id WHERE ul.user_id = $1 AND ul.list_id = $2",
+	query := fmt.Sprintf("SELECT tl.id, tl.title, tl.description FROM %s tl INNER JOIN %s ul on tl.id = ul.list_id WHERE ul.list_id = $1",
 		todoListTable, userListTable)
 
-	err := r.db.Get(&list, query, userId,listId)
+	err := r.db.Get(&list, query,listId)
 	
 	return list, err
 
